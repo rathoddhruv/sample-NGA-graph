@@ -1,0 +1,97 @@
+{
+  "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "node"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "site": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "index.html",
+            "main": "main.ts",
+            "tsConfig": "tsconfig.json",
+            "aot": true,
+            "optimization": true,
+            "buildOptimizer": true,
+            "outputHashing": "all",
+            "sourceMap": true,
+            "statsJson": true,
+            "extractCss": true,
+            "extractLicenses": true,
+            "namedChunks": true,
+            "vendorChunk": false,
+            "polyfills": "polyfills.ts",
+            "assets": [
+              "src/assets"
+            ],
+            "styles": [
+              "styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "fast": {
+              "optimization": false
+            },
+            "next": {
+              "fileReplacements": [],
+              "serviceWorker": true
+            },
+            "stable": {
+              "fileReplacements": [],
+              "serviceWorker": true
+            },
+            "archive": {
+              "fileReplacements": [],
+              "serviceWorker": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "site:build"
+          },
+          "configurations": {
+            "fast": {
+              "browserTarget": "site:build:fast"
+            },
+            "next": {
+              "browserTarget": "site:build:next"
+            },
+            "stable": {
+              "browserTarget": "site:build:stable"
+            },
+            "archive": {
+              "browserTarget": "site:build:archive"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "site:build"
+          }
+        }
+      }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "inlineStyle": true,
+      "prefix": "aio",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "aio"
+    }
+  }
+}
